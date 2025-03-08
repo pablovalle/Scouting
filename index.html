@@ -725,7 +725,7 @@
         } else {
             report += "✅ No se han detectado carencias significativas.\n\n";
         }
-        report += `\nPuntuación Media: ${globalScore} \n`;
+        report += `\nPuntuación Media: ${(globalScore*2).toFixed(2)} \n`;
         // 📌 Evaluación general
         let evaluation = "";
         if (globalScore > 4.25) {
