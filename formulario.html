@@ -1,0 +1,778 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe de Jugadora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</script>
+  <style>
+    /* Estilos base y de reset */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      background: #fff;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #007BFF;
+    }
+    input, select {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    select, input[type="text"], textarea {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .item-group {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+    }
+    .rating {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+    .rating label {
+      flex: 1;
+      text-align: center;
+      background: #e9ecef;
+      margin: 0 2px;
+      padding: 10px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .rating input[type="radio"] {
+      display: none;
+    }
+    .rating input[type="radio"]:checked + label {
+      background: #007BFF;
+      color: #fff;
+    }
+    .hidden {
+      display: none;
+    }
+    .submit-btn {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Informe de Jugadora</h1>
+    <form id="scoutingForm">
+      <!-- Datos generales -->
+      <div class="item-group">
+        <label for="nombre">Nombre de la Jugadora</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Ejemplo: Laura Gómez">
+      </div>
+
+      <div class="item-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required placeholder="Ejemplo: contacto@club.com">
+      </div>
+
+      <div class="item-group">
+        <label for="posicion">Posición</label>
+        <select id="posicion" name="posicion" required>
+          <option value="">Seleccione la posición</option>
+          <option value="portera">Portera</option>
+          <option value="central">Central</option>
+          <option value="lateral">Lateral</option>
+          <option value="pivote">Pivote</option>
+          <option value="int_mp">INT-MP</option>
+          <option value="extremo">Extremo</option>
+          <option value="delantera">Delantera</option>
+        </select>
+      </div>
+
+      <!-- Sección Porteras -->
+      <div id="section-portera" class="position-section hidden">
+        <h2>Porteras</h2>
+        <div class="item-group">
+          <label>Golpeo de Suelo</label>
+          <div class="rating">
+            <input type="radio" id="portera-gs-1" name="portera_golpeo_suelo" value="1" data-faceta="Golpeo de Suelo"><label for="portera-gs-1">1</label>
+            <input type="radio" id="portera-gs-2" name="portera_golpeo_suelo" value="2" data-faceta="Golpeo de Suelo"><label for="portera-gs-2">2</label>
+            <input type="radio" id="portera-gs-3" name="portera_golpeo_suelo" value="3" data-faceta="Golpeo de Suelo"><label for="portera-gs-3">3</label>
+            <input type="radio" id="portera-gs-4" name="portera_golpeo_suelo" value="4" data-faceta="Golpeo de Suelo"><label for="portera-gs-4">4</label>
+            <input type="radio" id="portera-gs-5" name="portera_golpeo_suelo" value="5" data-faceta="Golpeo de Suelo"><label for="portera-gs-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Golpeo en Aire</label>
+          <div class="rating">
+            <input type="radio" id="portera-ga-1" name="portera_golpeo_aire" value="1" data-faceta="Golpeo de Aire"><label for="portera-ga-1">1</label>
+            <input type="radio" id="portera-ga-2" name="portera_golpeo_aire" value="2" data-faceta="Golpeo de Aire"><label for="portera-ga-2">2</label>
+            <input type="radio" id="portera-ga-3" name="portera_golpeo_aire" value="3" data-faceta="Golpeo de Aire"><label for="portera-ga-3">3</label>
+            <input type="radio" id="portera-ga-4" name="portera_golpeo_aire" value="4" data-faceta="Golpeo de Aire"><label for="portera-ga-4">4</label>
+            <input type="radio" id="portera-ga-5" name="portera_golpeo_aire" value="5" data-faceta="Golpeo de Aire"><label for="portera-ga-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Estructura</label>
+          <div class="rating">
+            <input type="radio" id="portera-es-1" name="portera_estructura" value="1" data-faceta="Estructura"><label for="portera-es-1">1</label>
+            <input type="radio" id="portera-es-2" name="portera_estructura" value="2" data-faceta="Estructura"><label for="portera-es-2">2</label>
+            <input type="radio" id="portera-es-3" name="portera_estructura" value="3" data-faceta="Estructura"><label for="portera-es-3">3</label>
+            <input type="radio" id="portera-es-4" name="portera_estructura" value="4" data-faceta="Estructura"><label for="portera-es-4">4</label>
+            <input type="radio" id="portera-es-5" name="portera_estructura" value="5" data-faceta="Estructura"><label for="portera-es-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Velocidad de Reacción</label>
+          <div class="rating">
+            <input type="radio" id="portera-vr-1" name="portera_velocidad_reaccion" value="1" data-faceta="Velocidad de Reacción"><label for="portera-vr-1">1</label>
+            <input type="radio" id="portera-vr-2" name="portera_velocidad_reaccion" value="2" data-faceta="Velocidad de Reacción"><label for="portera-vr-2">2</label>
+            <input type="radio" id="portera-vr-3" name="portera_velocidad_reaccion" value="3" data-faceta="Velocidad de Reacción"><label for="portera-vr-3">3</label>
+            <input type="radio" id="portera-vr-4" name="portera_velocidad_reaccion" value="4" data-faceta="Velocidad de Reacción"><label for="portera-vr-4">4</label>
+            <input type="radio" id="portera-vr-5" name="portera_velocidad_reaccion" value="5" data-faceta="Velocidad de Reacción"><label for="portera-vr-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Bloqueo</label>
+          <div class="rating">
+            <input type="radio" id="portera-bl-1" name="portera_bloqueo" value="1" data-faceta="Bloqueo"><label for="portera-bl-1">1</label>
+            <input type="radio" id="portera-bl-2" name="portera_bloqueo" value="2" data-faceta="Bloqueo"><label for="portera-bl-2">2</label>
+            <input type="radio" id="portera-bl-3" name="portera_bloqueo" value="3" data-faceta="Bloqueo"><label for="portera-bl-3">3</label>
+            <input type="radio" id="portera-bl-4" name="portera_bloqueo" value="4" data-faceta="Bloqueo"><label for="portera-bl-4">4</label>
+            <input type="radio" id="portera-bl-5" name="portera_bloqueo" value="5" data-faceta="Bloqueo"><label for="portera-bl-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Desvío</label>
+          <div class="rating">
+            <input type="radio" id="portera-dv-1" name="portera_desvio" value="1" data-faceta="Desvío"><label for="portera-dv-1">1</label>
+            <input type="radio" id="portera-dv-2" name="portera_desvio" value="2" data-faceta="Desvío"><label for="portera-dv-2">2</label>
+            <input type="radio" id="portera-dv-3" name="portera_desvio" value="3" data-faceta="Desvío"><label for="portera-dv-3">3</label>
+            <input type="radio" id="portera-dv-4" name="portera_desvio" value="4" data-faceta="Desvío"><label for="portera-dv-4">4</label>
+            <input type="radio" id="portera-dv-5" name="portera_desvio" value="5" data-faceta="Desvío"><label for="portera-dv-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Juego Aéreo</label>
+          <div class="rating">
+            <input type="radio" id="portera-ja-1" name="portera_juego_aereo" value="1" data-faceta="Juego Aéreo"><label for="portera-ja-1">1</label>
+            <input type="radio" id="portera-ja-2" name="portera_juego_aereo" value="2" data-faceta="Juego Aéreo"><label for="portera-ja-2">2</label>
+            <input type="radio" id="portera-ja-3" name="portera_juego_aereo" value="3" data-faceta="Juego Aéreo"><label for="portera-ja-3">3</label>
+            <input type="radio" id="portera-ja-4" name="portera_juego_aereo" value="4" data-faceta="Juego Aéreo"><label for="portera-ja-4">4</label>
+            <input type="radio" id="portera-ja-5" name="portera_juego_aereo" value="5" data-faceta="Juego Aéreo"><label for="portera-ja-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Lectura del Juego</label>
+          <div class="rating">
+            <input type="radio" id="portera-lj-1" name="portera_lectura_juego" value="1" data-faceta="Lectura del Juego"><label for="portera-lj-1">1</label>
+            <input type="radio" id="portera-lj-2" name="portera_lectura_juego" value="2" data-faceta="Lectura del Juego"><label for="portera-lj-2">2</label>
+            <input type="radio" id="portera-lj-3" name="portera_lectura_juego" value="3" data-faceta="Lectura del Juego"><label for="portera-lj-3">3</label>
+            <input type="radio" id="portera-lj-4" name="portera_lectura_juego" value="4" data-faceta="Lectura del Juego"><label for="portera-lj-4">4</label>
+            <input type="radio" id="portera-lj-5" name="portera_lectura_juego" value="5" data-faceta="Lectura del Juego"><label for="portera-lj-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Centrales -->
+      <div id="section-central" class="position-section hidden">
+        <h2>Centrales</h2>
+        <div class="item-group">
+          <label>Lectura del Juego</label>
+          <div class="rating">
+            <input type="radio" id="central-lj-1" name="central_lectura_juego" value="1" data-faceta="Lectura del Juego"><label for="central-lj-1">1</label>
+            <input type="radio" id="central-lj-2" name="central_lectura_juego" value="2" data-faceta="Lectura del Juego"><label for="central-lj-2">2</label>
+            <input type="radio" id="central-lj-3" name="central_lectura_juego" value="3" data-faceta="Lectura del Juego"><label for="central-lj-3">3</label>
+            <input type="radio" id="central-lj-4" name="central_lectura_juego" value="4" data-faceta="Lectura del Juego"><label for="central-lj-4">4</label>
+            <input type="radio" id="central-lj-5" name="central_lectura_juego" value="5" data-faceta="Lectura del Juego"><label for="central-lj-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Técnica - Pase</label>
+          <div class="rating">
+            <input type="radio" id="central-pase-1" name="central_tecnica_pase" value="1" data-faceta="Técnica - Pase"><label for="central-pase-1">1</label>
+            <input type="radio" id="central-pase-2" name="central_tecnica_pase" value="2" data-faceta="Técnica - Pase"><label for="central-pase-2">2</label>
+            <input type="radio" id="central-pase-3" name="central_tecnica_pase" value="3" data-faceta="Técnica - Pase"><label for="central-pase-3">3</label>
+            <input type="radio" id="central-pase-4" name="central_tecnica_pase" value="4" data-faceta="Técnica - Pase"><label for="central-pase-4">4</label>
+            <input type="radio" id="central-pase-5" name="central_tecnica_pase" value="5" data-faceta="Técnica - Pase"><label for="central-pase-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Técnica - Control</label>
+          <div class="rating">
+            <input type="radio" id="central-control-1" name="central_tecnica_control" value="1" data-faceta="Técnica - Control"><label for="central-control-1">1</label>
+            <input type="radio" id="central-control-2" name="central_tecnica_control" value="2" data-faceta="Técnica - Control"><label for="central-control-2">2</label>
+            <input type="radio" id="central-control-3" name="central_tecnica_control" value="3" data-faceta="Técnica - Control"><label for="central-control-3">3</label>
+            <input type="radio" id="central-control-4" name="central_tecnica_control" value="4" data-faceta="Técnica - Control"><label for="central-control-4">4</label>
+            <input type="radio" id="central-control-5" name="central_tecnica_control" value="5" data-faceta="Técnica - Control"><label for="central-control-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Físico</label>
+          <div class="rating">
+            <input type="radio" id="central-fisico-1" name="central_fisico" value="1" data-faceta="Físico"><label for="central-fisico-1">1</label>
+            <input type="radio" id="central-fisico-2" name="central_fisico" value="2" data-faceta="Físico"><label for="central-fisico-2">2</label>
+            <input type="radio" id="central-fisico-3" name="central_fisico" value="3" data-faceta="Físico"><label for="central-fisico-3">3</label>
+            <input type="radio" id="central-fisico-4" name="central_fisico" value="4" data-faceta="Físico"><label for="central-fisico-4">4</label>
+            <input type="radio" id="central-fisico-5" name="central_fisico" value="5" data-faceta="Físico"><label for="central-fisico-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Duelo Defensivo</label>
+          <div class="rating">
+            <input type="radio" id="central-duelo-1" name="central_duelo_defensivo" value="1" data-faceta="Duelo Defensivo"><label for="central-duelo-1">1</label>
+            <input type="radio" id="central-duelo-2" name="central_duelo_defensivo" value="2" data-faceta="Duelo Defensivo"><label for="central-duelo-2">2</label>
+            <input type="radio" id="central-duelo-3" name="central_duelo_defensivo" value="3" data-faceta="Duelo Defensivo"><label for="central-duelo-3">3</label>
+            <input type="radio" id="central-duelo-4" name="central_duelo_defensivo" value="4" data-faceta="Duelo Defensivo"><label for="central-duelo-4">4</label>
+            <input type="radio" id="central-duelo-5" name="central_duelo_defensivo" value="5" data-faceta="Duelo Defensivo"><label for="central-duelo-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Defensa de Área</label>
+          <div class="rating">
+            <input type="radio" id="central-defarea-1" name="central_defensa_area" value="1" data-faceta="Defensa de Área"><label for="central-defarea-1">1</label>
+            <input type="radio" id="central-defarea-2" name="central_defensa_area" value="2" data-faceta="Defensa de Área"><label for="central-defarea-2">2</label>
+            <input type="radio" id="central-defarea-3" name="central_defensa_area" value="3" data-faceta="Defensa de Área"><label for="central-defarea-3">3</label>
+            <input type="radio" id="central-defarea-4" name="central_defensa_area" value="4" data-faceta="Defensa de Área"><label for="central-defarea-4">4</label>
+            <input type="radio" id="central-defarea-5" name="central_defensa_area" value="5" data-faceta="Defensa de Área"><label for="central-defarea-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Comportamientos de Línea</label>
+          <div class="rating">
+            <input type="radio" id="central-cl-1" name="central_comportamientos_linea" value="1" data-faceta="Comportamientos de Línea"><label for="central-cl-1">1</label>
+            <input type="radio" id="central-cl-2" name="central_comportamientos_linea" value="2" data-faceta="Comportamientos de Línea"><label for="central-cl-2">2</label>
+            <input type="radio" id="central-cl-3" name="central_comportamientos_linea" value="3" data-faceta="Comportamientos de Línea"><label for="central-cl-3">3</label>
+            <input type="radio" id="central-cl-4" name="central_comportamientos_linea" value="4" data-faceta="Comportamientos de Línea"><label for="central-cl-4">4</label>
+            <input type="radio" id="central-cl-5" name="central_comportamientos_linea" value="5" data-faceta="Comportamientos de Línea"><label for="central-cl-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Personalidad</label>
+          <div class="rating">
+            <input type="radio" id="central-personalidad-1" name="central_personalidad" value="1" data-faceta="Personalidad"><label for="central-personalidad-1">1</label>
+            <input type="radio" id="central-personalidad-2" name="central_personalidad" value="2" data-faceta="Personalidad"><label for="central-personalidad-2">2</label>
+            <input type="radio" id="central-personalidad-3" name="central_personalidad" value="3" data-faceta="Personalidad"><label for="central-personalidad-3">3</label>
+            <input type="radio" id="central-personalidad-4" name="central_personalidad" value="4" data-faceta="Personalidad"><label for="central-personalidad-4">4</label>
+            <input type="radio" id="central-personalidad-5" name="central_personalidad" value="5" data-faceta="Personalidad"><label for="central-personalidad-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Laterales -->
+      <div id="section-lateral" class="position-section hidden">
+        <h2>Laterales</h2>
+        <div class="item-group">
+          <label>Lectura del Juego</label>
+          <div class="rating">
+            <input type="radio" id="lateral-lj-1" name="lateral_lectura_juego" value="1" data-faceta="Lectura del Juego"><label for="lateral-lj-1">1</label>
+            <input type="radio" id="lateral-lj-2" name="lateral_lectura_juego" value="2" data-faceta="Lectura del Juego"><label for="lateral-lj-2">2</label>
+            <input type="radio" id="lateral-lj-3" name="lateral_lectura_juego" value="3" data-faceta="Lectura del Juego"><label for="lateral-lj-3">3</label>
+            <input type="radio" id="lateral-lj-4" name="lateral_lectura_juego" value="4" data-faceta="Lectura del Juego"><label for="lateral-lj-4">4</label>
+            <input type="radio" id="lateral-lj-5" name="lateral_lectura_juego" value="5" data-faceta="Lectura del Juego"><label for="lateral-lj-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Técnica - Pase</label>
+          <div class="rating">
+            <input type="radio" id="lateral-pase-1" name="lateral_tecnica_pase" value="1" data-faceta="Técnica - Pase"><label for="lateral-pase-1">1</label>
+            <input type="radio" id="lateral-pase-2" name="lateral_tecnica_pase" value="2" data-faceta="Técnica - Pase"><label for="lateral-pase-2">2</label>
+            <input type="radio" id="lateral-pase-3" name="lateral_tecnica_pase" value="3" data-faceta="Técnica - Pase"><label for="lateral-pase-3">3</label>
+            <input type="radio" id="lateral-pase-4" name="lateral_tecnica_pase" value="4" data-faceta="Técnica - Pase"><label for="lateral-pase-4">4</label>
+            <input type="radio" id="lateral-pase-5" name="lateral_tecnica_pase" value="5" data-faceta="Técnica - Pase"><label for="lateral-pase-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Técnica - Control</label>
+          <div class="rating">
+            <input type="radio" id="lateral-control-1" name="lateral_tecnica_control" value="1" data-faceta="Técnica - Control"><label for="lateral-control-1">1</label>
+            <input type="radio" id="lateral-control-2" name="lateral_tecnica_control" value="2" data-faceta="Técnica - Control"><label for="lateral-control-2">2</label>
+            <input type="radio" id="lateral-control-3" name="lateral_tecnica_control" value="3" data-faceta="Técnica - Control"><label for="lateral-control-3">3</label>
+            <input type="radio" id="lateral-control-4" name="lateral_tecnica_control" value="4" data-faceta="Técnica - Control"><label for="lateral-control-4">4</label>
+            <input type="radio" id="lateral-control-5" name="lateral_tecnica_control" value="5" data-faceta="Técnica - Control"><label for="lateral-control-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Físico</label>
+          <div class="rating">
+            <input type="radio" id="lateral-fisico-1" name="lateral_fisico" value="1" data-faceta="Físico"><label for="lateral-fisico-1">1</label>
+            <input type="radio" id="lateral-fisico-2" name="lateral_fisico" value="2" data-faceta="Físico"><label for="lateral-fisico-2">2</label>
+            <input type="radio" id="lateral-fisico-3" name="lateral_fisico" value="3" data-faceta="Físico"><label for="lateral-fisico-3">3</label>
+            <input type="radio" id="lateral-fisico-4" name="lateral_fisico" value="4" data-faceta="Físico"><label for="lateral-fisico-4">4</label>
+            <input type="radio" id="lateral-fisico-5" name="lateral_fisico" value="5" data-faceta="Físico"><label for="lateral-fisico-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Duelo Defensivo</label>
+          <div class="rating">
+            <input type="radio" id="lateral-duelo-def-1" name="lateral_duelo_defensivo" value="1" data-faceta="Duelo Defensivo"><label for="lateral-duelo-def-1">1</label>
+            <input type="radio" id="lateral-duelo-def-2" name="lateral_duelo_defensivo" value="2" data-faceta="Duelo Defensivo"><label for="lateral-duelo-def-2">2</label>
+            <input type="radio" id="lateral-duelo-def-3" name="lateral_duelo_defensivo" value="3" data-faceta="Duelo Defensivo"><label for="lateral-duelo-def-3">3</label>
+            <input type="radio" id="lateral-duelo-def-4" name="lateral_duelo_defensivo" value="4" data-faceta="Duelo Defensivo"><label for="lateral-duelo-def-4">4</label>
+            <input type="radio" id="lateral-duelo-def-5" name="lateral_duelo_defensivo" value="5" data-faceta="Duelo Defensivo"><label for="lateral-duelo-def-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Duelo Ofensivo</label>
+          <div class="rating">
+            <input type="radio" id="lateral-duelo-of-1" name="lateral_duelo_ofensivo" value="1" data-faceta="Duelo Ofensivo"><label for="lateral-duelo-of-1">1</label>
+            <input type="radio" id="lateral-duelo-of-2" name="lateral_duelo_ofensivo" value="2" data-faceta="Duelo Ofensivo"><label for="lateral-duelo-of-2">2</label>
+            <input type="radio" id="lateral-duelo-of-3" name="lateral_duelo_ofensivo" value="3" data-faceta="Duelo Ofensivo"><label for="lateral-duelo-of-3">3</label>
+            <input type="radio" id="lateral-duelo-of-4" name="lateral_duelo_ofensivo" value="4" data-faceta="Duelo Ofensivo"><label for="lateral-duelo-of-4">4</label>
+            <input type="radio" id="lateral-duelo-of-5" name="lateral_duelo_ofensivo" value="5" data-faceta="Duelo Ofensivo"><label for="lateral-duelo-of-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Defensa de Área</label>
+          <div class="rating">
+            <input type="radio" id="lateral-defarea-1" name="lateral_defensa_area" value="1" data-faceta="Defensa de Área"><label for="lateral-defarea-1">1</label>
+            <input type="radio" id="lateral-defarea-2" name="lateral_defensa_area" value="2" data-faceta="Defensa de Área"><label for="lateral-defarea-2">2</label>
+            <input type="radio" id="lateral-defarea-3" name="lateral_defensa_area" value="3" data-faceta="Defensa de Área"><label for="lateral-defarea-3">3</label>
+            <input type="radio" id="lateral-defarea-4" name="lateral_defensa_area" value="4" data-faceta="Defensa de Área"><label for="lateral-defarea-4">4</label>
+            <input type="radio" id="lateral-defarea-5" name="lateral_defensa_area" value="5" data-faceta="Defensa de Área"><label for="lateral-defarea-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Comportamientos de Línea</label>
+          <div class="rating">
+            <input type="radio" id="lateral-cl-1" name="lateral_comportamientos_linea" value="1" data-faceta="Comportamientos de Línea"><label for="lateral-cl-1">1</label>
+            <input type="radio" id="lateral-cl-2" name="lateral_comportamientos_linea" value="2" data-faceta="Comportamientos de Línea"><label for="lateral-cl-2">2</label>
+            <input type="radio" id="lateral-cl-3" name="lateral_comportamientos_linea" value="3" data-faceta="Comportamientos de Línea"><label for="lateral-cl-3">3</label>
+            <input type="radio" id="lateral-cl-4" name="lateral_comportamientos_linea" value="4" data-faceta="Comportamientos de Línea"><label for="lateral-cl-4">4</label>
+            <input type="radio" id="lateral-cl-5" name="lateral_comportamientos_linea" value="5" data-faceta="Comportamientos de Línea"><label for="lateral-cl-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Personalidad</label>
+          <div class="rating">
+            <input type="radio" id="lateral-personalidad-1" name="lateral_personalidad" value="1" data-faceta="Personalidad"><label for="lateral-personalidad-1">1</label>
+            <input type="radio" id="lateral-personalidad-2" name="lateral_personalidad" value="2" data-faceta="Personalidad"><label for="lateral-personalidad-2">2</label>
+            <input type="radio" id="lateral-personalidad-3" name="lateral_personalidad" value="3" data-faceta="Personalidad"><label for="lateral-personalidad-3">3</label>
+            <input type="radio" id="lateral-personalidad-4" name="lateral_personalidad" value="4" data-faceta="Personalidad"><label for="lateral-personalidad-4">4</label>
+            <input type="radio" id="lateral-personalidad-5" name="lateral_personalidad" value="5" data-faceta="Personalidad"><label for="lateral-personalidad-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Pivotes -->
+      <div id="section-pivote" class="position-section hidden">
+        <h2>Pivotes</h2>
+        <div class="item-group">
+          <label>Aprovechadora</label>
+          <div class="rating">
+            <input type="radio" id="pivote-aprovechadora-1" name="pivote_aprovechadora" value="1" data-faceta="Aprovechadora"><label for="pivote-aprovechadora-1">1</label>
+            <input type="radio" id="pivote-aprovechadora-2" name="pivote_aprovechadora" value="2" data-faceta="Aprovechadora"><label for="pivote-aprovechadora-2">2</label>
+            <input type="radio" id="pivote-aprovechadora-3" name="pivote_aprovechadora" value="3" data-faceta="Aprovechadora"><label for="pivote-aprovechadora-3">3</label>
+            <input type="radio" id="pivote-aprovechadora-4" name="pivote_aprovechadora" value="4" data-faceta="Aprovechadora"><label for="pivote-aprovechadora-4">4</label>
+            <input type="radio" id="pivote-aprovechadora-5" name="pivote_aprovechadora" value="5" data-faceta="Aprovechadora"><label for="pivote-aprovechadora-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Generadora</label>
+          <div class="rating">
+            <input type="radio" id="pivote-generadora-1" name="pivote_generadora" value="1" data-faceta="Generadora"><label for="pivote-generadora-1">1</label>
+            <input type="radio" id="pivote-generadora-2" name="pivote_generadora" value="2" data-faceta="Generadora"><label for="pivote-generadora-2">2</label>
+            <input type="radio" id="pivote-generadora-3" name="pivote_generadora" value="3" data-faceta="Generadora"><label for="pivote-generadora-3">3</label>
+            <input type="radio" id="pivote-generadora-4" name="pivote_generadora" value="4" data-faceta="Generadora"><label for="pivote-generadora-4">4</label>
+            <input type="radio" id="pivote-generadora-5" name="pivote_generadora" value="5" data-faceta="Generadora"><label for="pivote-generadora-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Golpeos</label>
+          <div class="rating">
+            <input type="radio" id="pivote-golpeos-1" name="pivote_golpeos" value="1" data-faceta="Golpeos"><label for="pivote-golpeos-1">1</label>
+            <input type="radio" id="pivote-golpeos-2" name="pivote_golpeos" value="2" data-faceta="Golpeos"><label for="pivote-golpeos-2">2</label>
+            <input type="radio" id="pivote-golpeos-3" name="pivote_golpeos" value="3" data-faceta="Golpeos"><label for="pivote-golpeos-3">3</label>
+            <input type="radio" id="pivote-golpeos-4" name="pivote_golpeos" value="4" data-faceta="Golpeos"><label for="pivote-golpeos-4">4</label>
+            <input type="radio" id="pivote-golpeos-5" name="pivote_golpeos" value="5" data-faceta="Golpeos"><label for="pivote-golpeos-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Equilibrio</label>
+          <div class="rating">
+            <input type="radio" id="pivote-equilibrio-1" name="pivote_equilibrio" value="1" data-faceta="Equilibrio"><label for="pivote-equilibrio-1">1</label>
+            <input type="radio" id="pivote-equilibrio-2" name="pivote_equilibrio" value="2" data-faceta="Equilibrio"><label for="pivote-equilibrio-2">2</label>
+            <input type="radio" id="pivote-equilibrio-3" name="pivote_equilibrio" value="3" data-faceta="Equilibrio"><label for="pivote-equilibrio-3">3</label>
+            <input type="radio" id="pivote-equilibrio-4" name="pivote_equilibrio" value="4" data-faceta="Equilibrio"><label for="pivote-equilibrio-4">4</label>
+            <input type="radio" id="pivote-equilibrio-5" name="pivote_equilibrio" value="5" data-faceta="Equilibrio"><label for="pivote-equilibrio-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Juego Aéreo</label>
+          <div class="rating">
+            <input type="radio" id="pivote-ja-1" name="pivote_juego_aereo" value="1" data-faceta="Juego Aéreo"><label for="pivote-ja-1">1</label>
+            <input type="radio" id="pivote-ja-2" name="pivote_juego_aereo" value="2" data-faceta="Juego Aéreo"><label for="pivote-ja-2">2</label>
+            <input type="radio" id="pivote-ja-3" name="pivote_juego_aereo" value="3" data-faceta="Juego Aéreo"><label for="pivote-ja-3">3</label>
+            <input type="radio" id="pivote-ja-4" name="pivote_juego_aereo" value="4" data-faceta="Juego Aéreo"><label for="pivote-ja-4">4</label>
+            <input type="radio" id="pivote-ja-5" name="pivote_juego_aereo" value="5" data-faceta="Juego Aéreo"><label for="pivote-ja-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Ayudas a Línea</label>
+          <div class="rating">
+            <input type="radio" id="pivote-ayudas-1" name="pivote_ayudas_linea" value="1" data-faceta="Ayudas a Línea"><label for="pivote-ayudas-1">1</label>
+            <input type="radio" id="pivote-ayudas-2" name="pivote_ayudas_linea" value="2" data-faceta="Ayudas a Línea"><label for="pivote-ayudas-2">2</label>
+            <input type="radio" id="pivote-ayudas-3" name="pivote_ayudas_linea" value="3" data-faceta="Ayudas a Línea"><label for="pivote-ayudas-3">3</label>
+            <input type="radio" id="pivote-ayudas-4" name="pivote_ayudas_linea" value="4" data-faceta="Ayudas a Línea"><label for="pivote-ayudas-4">4</label>
+            <input type="radio" id="pivote-ayudas-5" name="pivote_ayudas_linea" value="5" data-faceta="Ayudas a Línea"><label for="pivote-ayudas-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Duelo</label>
+          <div class="rating">
+            <input type="radio" id="pivote-duelo-1" name="pivote_duelo" value="1" data-faceta="Duelo"><label for="pivote-duelo-1">1</label>
+            <input type="radio" id="pivote-duelo-2" name="pivote_duelo" value="2" data-faceta="Duelo"><label for="pivote-duelo-2">2</label>
+            <input type="radio" id="pivote-duelo-3" name="pivote_duelo" value="3" data-faceta="Duelo"><label for="pivote-duelo-3">3</label>
+            <input type="radio" id="pivote-duelo-4" name="pivote_duelo" value="4" data-faceta="Duelo"><label for="pivote-duelo-4">4</label>
+            <input type="radio" id="pivote-duelo-5" name="pivote_duelo" value="5" data-faceta="Duelo"><label for="pivote-duelo-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección INT-MP -->
+      <div id="section-int_mp" class="position-section hidden">
+        <h2>INT-MP</h2>
+        <div class="item-group">
+          <label>Identificar Espacios/Ventajas</label>
+          <div class="rating">
+            <input type="radio" id="intmp-espacios-1" name="intmp_espacios" value="1" data-faceta="Indetificar Espacios/Ventajas"><label for="intmp-espacios-1">1</label>
+            <input type="radio" id="intmp-espacios-2" name="intmp_espacios" value="2" data-faceta="Indetificar Espacios/Ventajas"><label for="intmp-espacios-2">2</label>
+            <input type="radio" id="intmp-espacios-3" name="intmp_espacios" value="3" data-faceta="Indetificar Espacios/Ventajas"><label for="intmp-espacios-3">3</label>
+            <input type="radio" id="intmp-espacios-4" name="intmp_espacios" value="4" data-faceta="Indetificar Espacios/Ventajas"><label for="intmp-espacios-4">4</label>
+            <input type="radio" id="intmp-espacios-5" name="intmp_espacios" value="5" data-faceta="Indetificar Espacios/Ventajas"><label for="intmp-espacios-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Profundidad</label>
+          <div class="rating">
+            <input type="radio" id="intmp-profundidad-1" name="intmp_profundidad" value="1" data-faceta="Profundidad"><label for="intmp-profundidad-1">1</label>
+            <input type="radio" id="intmp-profundidad-2" name="intmp_profundidad" value="2" data-faceta="Profundidad"><label for="intmp-profundidad-2">2</label>
+            <input type="radio" id="intmp-profundidad-3" name="intmp_profundidad" value="3" data-faceta="Profundidad"><label for="intmp-profundidad-3">3</label>
+            <input type="radio" id="intmp-profundidad-4" name="intmp_profundidad" value="4" data-faceta="Profundidad"><label for="intmp-profundidad-4">4</label>
+            <input type="radio" id="intmp-profundidad-5" name="intmp_profundidad" value="5" data-faceta="Profundidad"><label for="intmp-profundidad-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Manejo/Último Pase</label>
+          <div class="rating">
+            <input type="radio" id="intmp-manejo-1" name="intmp_manejo" value="1" data-faceta="Manejo/Último Pase"><label for="intmp-manejo-1">1</label>
+            <input type="radio" id="intmp-manejo-2" name="intmp_manejo" value="2" data-faceta="Manejo/Último Pase"><label for="intmp-manejo-2">2</label>
+            <input type="radio" id="intmp-manejo-3" name="intmp_manejo" value="3" data-faceta="Manejo/Último Pase"><label for="intmp-manejo-3">3</label>
+            <input type="radio" id="intmp-manejo-4" name="intmp_manejo" value="4" data-faceta="Manejo/Último Pase"><label for="intmp-manejo-4">4</label>
+            <input type="radio" id="intmp-manejo-5" name="intmp_manejo" value="5" data-faceta="Manejo/Último Pase"><label for="intmp-manejo-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Caídas/2º Jugadas</label>
+          <div class="rating">
+            <input type="radio" id="intmp-caidas-1" name="intmp_caidas" value="1" data-faceta="Caídas/Segundas Jugadas"><label for="intmp-caidas-1">1</label>
+            <input type="radio" id="intmp-caidas-2" name="intmp_caidas" value="2" data-faceta="Caídas/Segundas Jugadas"><label for="intmp-caidas-2">2</label>
+            <input type="radio" id="intmp-caidas-3" name="intmp_caidas" value="3" data-faceta="Caídas/Segundas Jugadas"><label for="intmp-caidas-3">3</label>
+            <input type="radio" id="intmp-caidas-4" name="intmp_caidas" value="4" data-faceta="Caídas/Segundas Jugadas"><label for="intmp-caidas-4">4</label>
+            <input type="radio" id="intmp-caidas-5" name="intmp_caidas" value="5" data-faceta="Caídas/Segundas Jugadas"><label for="intmp-caidas-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Regularidad</label>
+          <div class="rating">
+            <input type="radio" id="intmp-regularidad-1" name="intmp_regularidad" value="1" data-faceta="Regularidad"><label for="intmp-regularidad-1">1</label>
+            <input type="radio" id="intmp-regularidad-2" name="intmp_regularidad" value="2" data-faceta="Regularidad"><label for="intmp-regularidad-2">2</label>
+            <input type="radio" id="intmp-regularidad-3" name="intmp_regularidad" value="3" data-faceta="Regularidad"><label for="intmp-regularidad-3">3</label>
+            <input type="radio" id="intmp-regularidad-4" name="intmp_regularidad" value="4" data-faceta="Regularidad"><label for="intmp-regularidad-4">4</label>
+            <input type="radio" id="intmp-regularidad-5" name="intmp_regularidad" value="5" data-faceta="Regularidad"><label for="intmp-regularidad-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Ida y Vuelta/Recorrido</label>
+          <div class="rating">
+            <input type="radio" id="intmp-recorrido-1" name="intmp_recorrido" value="1" data-faceta="Ida y vuelta/Recorrido"><label for="intmp-recorrido-1">1</label>
+            <input type="radio" id="intmp-recorrido-2" name="intmp_recorrido" value="2" data-faceta="Ida y vuelta/Recorrido"><label for="intmp-recorrido-2">2</label>
+            <input type="radio" id="intmp-recorrido-3" name="intmp_recorrido" value="3" data-faceta="Ida y vuelta/Recorrido"><label for="intmp-recorrido-3">3</label>
+            <input type="radio" id="intmp-recorrido-4" name="intmp_recorrido" value="4" data-faceta="Ida y vuelta/Recorrido"><label for="intmp-recorrido-4">4</label>
+            <input type="radio" id="intmp-recorrido-5" name="intmp_recorrido" value="5" data-faceta="Ida y vuelta/Recorrido"><label for="intmp-recorrido-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Cerrar Líneas de Pase</label>
+          <div class="rating">
+            <input type="radio" id="intmp-cerrar-1" name="intmp_cerrar" value="1" data-faceta="Cerrar Líneas de Pase"><label for="intmp-cerrar-1">1</label>
+            <input type="radio" id="intmp-cerrar-2" name="intmp_cerrar" value="2" data-faceta="Cerrar Líneas de Pase"><label for="intmp-cerrar-2">2</label>
+            <input type="radio" id="intmp-cerrar-3" name="intmp_cerrar" value="3" data-faceta="Cerrar Líneas de Pase"><label for="intmp-cerrar-3">3</label>
+            <input type="radio" id="intmp-cerrar-4" name="intmp_cerrar" value="4" data-faceta="Cerrar Líneas de Pase"><label for="intmp-cerrar-4">4</label>
+            <input type="radio" id="intmp-cerrar-5" name="intmp_cerrar" value="5" data-faceta="Cerrar Líneas de Pase"><label for="intmp-cerrar-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Presionar/Presentarse</label>
+          <div class="rating">
+            <input type="radio" id="intmp-presionar-1" name="intmp_presionar" value="1" data-faceta="Presionar/Presentarse"><label for="intmp-presionar-1">1</label>
+            <input type="radio" id="intmp-presionar-2" name="intmp_presionar" value="2" data-faceta="Presionar/Presentarse"><label for="intmp-presionar-2">2</label>
+            <input type="radio" id="intmp-presionar-3" name="intmp_presionar" value="3" data-faceta="Presionar/Presentarse"><label for="intmp-presionar-3">3</label>
+            <input type="radio" id="intmp-presionar-4" name="intmp_presionar" value="4" data-faceta="Presionar/Presentarse"><label for="intmp-presionar-4">4</label>
+            <input type="radio" id="intmp-presionar-5" name="intmp_presionar" value="5" data-faceta="Presionar/Presentarse"><label for="intmp-presionar-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Extremos -->
+      <div id="section-extremo" class="position-section hidden">
+        <h2>Extremos</h2>
+        <div class="item-group">
+          <label>Espacio</label>
+          <div class="rating">
+            <input type="radio" id="extremo-espacio-1" name="extremo_espacio" value="1" data-faceta="Espacio"><label for="extremo-espacio-1">1</label>
+            <input type="radio" id="extremo-espacio-2" name="extremo_espacio" value="2" data-faceta="Espacio"><label for="extremo-espacio-2">2</label>
+            <input type="radio" id="extremo-espacio-3" name="extremo_espacio" value="3" data-faceta="Espacio"><label for="extremo-espacio-3">3</label>
+            <input type="radio" id="extremo-espacio-4" name="extremo_espacio" value="4" data-faceta="Espacio"><label for="extremo-espacio-4">4</label>
+            <input type="radio" id="extremo-espacio-5" name="extremo_espacio" value="5" data-faceta="Espacio"><label for="extremo-espacio-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>1 vs 1</label>
+          <div class="rating">
+            <input type="radio" id="extremo-1vs1-1" name="extremo_1vs1" value="1" data-faceta="1 vs 1"><label for="extremo-1vs1-1">1</label>
+            <input type="radio" id="extremo-1vs1-2" name="extremo_1vs1" value="2" data-faceta="1 vs 1"><label for="extremo-1vs1-2">2</label>
+            <input type="radio" id="extremo-1vs1-3" name="extremo_1vs1" value="3" data-faceta="1 vs 1"><label for="extremo-1vs1-3">3</label>
+            <input type="radio" id="extremo-1vs1-4" name="extremo_1vs1" value="4" data-faceta="1 vs 1"><label for="extremo-1vs1-4">4</label>
+            <input type="radio" id="extremo-1vs1-5" name="extremo_1vs1" value="5" data-faceta="1 vs 1"><label for="extremo-1vs1-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Asociativo</label>
+          <div class="rating">
+            <input type="radio" id="extremo-asociativo-1" name="extremo_asociativo" value="1" data-faceta="Asociativo"><label for="extremo-asociativo-1">1</label>
+            <input type="radio" id="extremo-asociativo-2" name="extremo_asociativo" value="2" data-faceta="Asociativo"><label for="extremo-asociativo-2">2</label>
+            <input type="radio" id="extremo-asociativo-3" name="extremo_asociativo" value="3" data-faceta="Asociativo"><label for="extremo-asociativo-3">3</label>
+            <input type="radio" id="extremo-asociativo-4" name="extremo_asociativo" value="4" data-faceta="Asociativo"><label for="extremo-asociativo-4">4</label>
+            <input type="radio" id="extremo-asociativo-5" name="extremo_asociativo" value="5" data-faceta="Asociativo"><label for="extremo-asociativo-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Manejo</label>
+          <div class="rating">
+            <input type="radio" id="extremo-manejo-1" name="extremo_manejo" value="1" data-faceta="Manejo"><label for="extremo-manejo-1">1</label>
+            <input type="radio" id="extremo-manejo-2" name="extremo_manejo" value="2" data-faceta="Manejo"><label for="extremo-manejo-2">2</label>
+            <input type="radio" id="extremo-manejo-3" name="extremo_manejo" value="3" data-faceta="Manejo"><label for="extremo-manejo-3">3</label>
+            <input type="radio" id="extremo-manejo-4" name="extremo_manejo" value="4" data-faceta="Manejo"><label for="extremo-manejo-4">4</label>
+            <input type="radio" id="extremo-manejo-5" name="extremo_manejo" value="5" data-faceta="Manejo"><label for="extremo-manejo-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Gol/Remate</label>
+          <div class="rating">
+            <input type="radio" id="extremo-gol-1" name="extremo_gol" value="1" data-faceta="Gol/Remate"><label for="extremo-gol-1">1</label>
+            <input type="radio" id="extremo-gol-2" name="extremo_gol" value="2" data-faceta="Gol/Remate"><label for="extremo-gol-2">2</label>
+            <input type="radio" id="extremo-gol-3" name="extremo_gol" value="3" data-faceta="Gol/Remate"><label for="extremo-gol-3">3</label>
+            <input type="radio" id="extremo-gol-4" name="extremo_gol" value="4" data-faceta="Gol/Remate"><label for="extremo-gol-4">4</label>
+            <input type="radio" id="extremo-gol-5" name="extremo_gol" value="5" data-faceta="Gol/Remate"><label for="extremo-gol-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Ayudas a LAT/MC</label>
+          <div class="rating">
+            <input type="radio" id="extremo-ayudas-1" name="extremo_ayudas_latmc" value="1" data-faceta="Ayudas a LAT/MC"><label for="extremo-ayudas-1">1</label>
+            <input type="radio" id="extremo-ayudas-2" name="extremo_ayudas_latmc" value="2" data-faceta="Ayudas a LAT/MC"><label for="extremo-ayudas-2">2</label>
+            <input type="radio" id="extremo-ayudas-3" name="extremo_ayudas_latmc" value="3" data-faceta="Ayudas a LAT/MC"><label for="extremo-ayudas-3">3</label>
+            <input type="radio" id="extremo-ayudas-4" name="extremo_ayudas_latmc" value="4" data-faceta="Ayudas a LAT/MC"><label for="extremo-ayudas-4">4</label>
+            <input type="radio" id="extremo-ayudas-5" name="extremo_ayudas_latmc" value="5" data-faceta="Ayudas a LAT/MC"><label for="extremo-ayudas-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Delanteras -->
+      <div id="section-delantera" class="position-section hidden">
+        <h2>Delanteras</h2>
+        <div class="item-group">
+          <label>Juego Aéreo</label>
+          <div class="rating">
+            <input type="radio" id="delantera-ja-1" name="delantera_juego_aereo" value="1" data-faceta="Juego Aéreo"><label for="delantera-ja-1">1</label>
+            <input type="radio" id="delantera-ja-2" name="delantera_juego_aereo" value="2" data-faceta="Juego Aéreo"><label for="delantera-ja-2">2</label>
+            <input type="radio" id="delantera-ja-3" name="delantera_juego_aereo" value="3" data-faceta="Juego Aéreo"><label for="delantera-ja-3">3</label>
+            <input type="radio" id="delantera-ja-4" name="delantera_juego_aereo" value="4" data-faceta="Juego Aéreo"><label for="delantera-ja-4">4</label>
+            <input type="radio" id="delantera-ja-5" name="delantera_juego_aereo" value="5" data-faceta="Juego Aéreo"><label for="delantera-ja-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Cerrar Líneas</label>
+          <div class="rating">
+            <input type="radio" id="delantera-cerrar-1" name="delantera_cerrar_lineas" value="1" data-faceta="Cerrar Líneas"><label for="delantera-cerrar-1">1</label>
+            <input type="radio" id="delantera-cerrar-2" name="delantera_cerrar_lineas" value="2" data-faceta="Cerrar Líneas"><label for="delantera-cerrar-2">2</label>
+            <input type="radio" id="delantera-cerrar-3" name="delantera_cerrar_lineas" value="3" data-faceta="Cerrar Líneas"><label for="delantera-cerrar-3">3</label>
+            <input type="radio" id="delantera-cerrar-4" name="delantera_cerrar_lineas" value="4" data-faceta="Cerrar Líneas"><label for="delantera-cerrar-4">4</label>
+            <input type="radio" id="delantera-cerrar-5" name="delantera_cerrar_lineas" value="5" data-faceta="Cerrar Líneas"><label for="delantera-cerrar-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Presión</label>
+          <div class="rating">
+            <input type="radio" id="delantera-presion-1" name="delantera_presion" value="1" data-faceta="Presión"><label for="delantera-presion-1">1</label>
+            <input type="radio" id="delantera-presion-2" name="delantera_presion" value="2" data-faceta="Presión"><label for="delantera-presion-2">2</label>
+            <input type="radio" id="delantera-presion-3" name="delantera_presion" value="3" data-faceta="Presión"><label for="delantera-presion-3">3</label>
+            <input type="radio" id="delantera-presion-4" name="delantera_presion" value="4" data-faceta="Presión"><label for="delantera-presion-4">4</label>
+            <input type="radio" id="delantera-presion-5" name="delantera_presion" value="5" data-faceta="Presión"><label for="delantera-presion-5">5</label>
+          </div>
+        </div>
+        <div class="item-group">
+          <label>Actividad</label>
+          <div class="rating">
+            <input type="radio" id="delantera-actividad-1" name="delantera_actividad" value="1" data-faceta="Actividad"><label for="delantera-actividad-1">1</label>
+            <input type="radio" id="delantera-actividad-2" name="delantera_actividad" value="2" data-faceta="Actividad"><label for="delantera-actividad-2">2</label>
+            <input type="radio" id="delantera-actividad-3" name="delantera_actividad" value="3" data-faceta="Actividad"><label for="delantera-actividad-3">3</label>
+            <input type="radio" id="delantera-actividad-4" name="delantera_actividad" value="4" data-faceta="Actividad"><label for="delantera-actividad-4">4</label>
+            <input type="radio" id="delantera-actividad-5" name="delantera_actividad" value="5" data-faceta="Actividad"><label for="delantera-actividad-5">5</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Perfil e Informe -->
+
+      <button type="submit" class="submit-btn">Enviar Informe</button>
+    </form>
+  </div>
+
+  <script>
+    // Muestra la sección de ítems según la posición seleccionada
+    document.getElementById('posicion').addEventListener('change', function() {
+      var sections = document.querySelectorAll('.position-section');
+      sections.forEach(function(section) {
+        section.classList.add('hidden');
+      });
+      var selected = this.value;
+      if(selected) {
+        document.getElementById('section-' + selected).classList.remove('hidden');
+      }
+    });
+    function generateReport() {
+        var playerName = document.getElementById("nombre").value;
+        var position = document.getElementById("posicion").value;
+        var ratings = document.querySelectorAll('.rating input[type="radio"]:checked');
+
+        let strengths = [];
+        let weaknesses = [];
+
+        let report = `📌 INFORME DE JUGADORA - ${playerName}\n`;
+        report += `👤 Posición: ${position}\n\n`;
+        let scores=0;
+        ratings.forEach(function(radio) {
+            let itemLabel = radio.getAttribute("data-faceta");
+            let score = parseInt(radio.value);
+            let phrase = "";
+            scores=scores+score;
+
+            if (score === 5) {
+                phrase = `✅ ${itemLabel}: La jugadora sobresale en esta faceta, mostrando un nivel destacado.`;
+                strengths.push(phrase);
+            } else if (score === 4) {
+                phrase = `✔️ ${itemLabel}: Tiene un rendimiento sólido y consistente.`;
+                strengths.push(phrase);
+            } else if (score === 3) {
+                phrase = `⚖️ ${itemLabel}: Cumple correctamente, pero tiene margen de mejora.`;
+            } else if (score === 2) {
+                phrase = `⚠️ ${itemLabel}: Presenta dificultades en este aspecto, lo que podría limitar su rendimiento.`;
+                weaknesses.push(phrase);
+            } else {
+                phrase = `❌ ${itemLabel}: Necesita una mejora urgente en esta área para competir al nivel deseado.`;
+                weaknesses.push(phrase);
+            }
+
+            //report += phrase + "\n";
+            //console.log(phrase);
+        });
+
+        globalScore=scores/ratings.length;
+        report += "\n🔍 Análisis Global:\n";
+
+        if (strengths.length > 0) {
+            report += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
+        } else {
+            report += "❌ No presenta puntos destacados en esta evaluación.\n\n";
+        }
+
+        if (weaknesses.length > 0) {
+            report += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
+        } else {
+            report += "✅ No se han detectado carencias significativas.\n\n";
+        }
+        report += `\nPuntuación Media: ${globalScore} \n`;
+        // 📌 Evaluación general
+        let evaluation = "";
+        if (globalScore > 4.25) {
+            evaluation = "📌 Evaluación: FICHAR YA ✅";
+        } else if (globalScore > 3.75) {
+            evaluation = "👀 Evaluación: INTERESANTE 🔍";
+        } else if (globalScore > 3) {
+            evaluation = "🔄 Evaluación: SEGUIR OBSERVANDO 👁️";
+        } else {
+            evaluation = "❌ Evaluación: DESCARTAR 🚫";
+        }
+
+        report += evaluation + "\n";
+
+        return report;
+    }
+
+
+    // Manejo básico de envío del formulario
+    document.getElementById('scoutingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('email').value;
+        var playerName = document.getElementById('nombre').value;
+        var report = generateReport();
+        console.log(JSON.stringify({
+            email: email,
+            playerName: playerName,
+            report: report
+            }))
+        fetch("https://script.google.com/macros/s/AKfycbyqR5HCVyQpE4cEweZT9aN_SQzVkypyk3a6OpA31-LSydE9qJhqAsx8aOm34jQeXTs/exec", { // Reemplaza con tu URL de Apps Script
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            email: email,
+            playerName: playerName,
+            report: report
+            }),
+        })
+        .then(() => {
+            alert("Informe de " + playerName + " enviado a " + email);
+        })
+        .catch(error => console.error("Error al enviar:", error));
+    });
+
+  </script>
+</body>
+</html>
