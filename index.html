@@ -658,7 +658,7 @@
 
       <!-- Sección Perfil e Informe -->
 
-      <button type="submit" class="submit-btn">Enviar Informe</button>
+      <button type="submit" class="submit-btn" id="SubmitButton">Enviar Informe</button>
     </form>
   </div>
 
@@ -750,7 +750,7 @@
         var email = document.getElementById('email').value;
         var playerName = document.getElementById('nombre').value;
         var report = generateReport();
-        const submitButton = document.getElementById("submitButton");
+        const submitButton = document.getElementById("SubmitButton");
         const form = document.getElementById("scoutingForm");
         submitButton.disabled = true;
         console.log(JSON.stringify({
