@@ -750,6 +750,9 @@
         var email = document.getElementById('email').value;
         var playerName = document.getElementById('nombre').value;
         var report = generateReport();
+        const submitButton = document.getElementById("submitButton");
+        const form = document.getElementById("scoutingForm");
+        submitButton.disabled = true;
         console.log(JSON.stringify({
             email: email,
             playerName: playerName,
@@ -769,10 +772,14 @@
         })
         .then(() => {
             alert("Informe de " + playerName + " enviado a " + email);
+            submitButton.disabled = false;
+            form.reset();
         })
-        .catch(error => console.error("Error al enviar:", error));
+        .catch(error => {console.error("Error al enviar:", error);
+          submitButton.disabled = false;
+          form.reset();
+        });
     });
-
   </script>
 </body>
 </html>
