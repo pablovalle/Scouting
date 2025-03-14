@@ -798,6 +798,9 @@
       
       var email = document.getElementById('email').value;
       var data = generateReportData();
+      var playerName = document.getElementById("nombre").value;
+      const submitButton = document.getElementById("SubmitButton");
+      const form = document.getElementById("scoutingForm");
       data.email = email; // Agregar correo al objeto
       
       fetch("https://script.google.com/macros/s/AKfycbxkdkGMwFuvZKff9C0jqMqeRa-xInvUTfHzWgW1FSCSaH3WSlze0PrgqAB-pywGkbI_/exec", { // Reemplaza con tu URL de Apps Script
