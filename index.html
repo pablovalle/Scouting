@@ -743,15 +743,6 @@
     document.getElementById('scoutingForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // Verificar que todos los ítems tengan respuesta
-      let ratings = document.querySelectorAll('.rating');
-      for (let rating of ratings) {
-        if (!rating.querySelector('input:checked')) {
-          alert("Por favor, completa todas las evaluaciones antes de enviar.");
-          return;
-        }
-      }
-      
       var email = document.getElementById('email').value;
       var data = generateReportData();
       data.email = email; // Agregar correo al objeto
