@@ -98,8 +98,24 @@
     <form id="scoutingForm">
       <!-- Datos generales -->
       <div class="item-group">
+        <label for="scout">Nombre del Scout</label>
+        <input type="text" id="scout" name="scout" required placeholder="Ejemplo: Juan Pérez">
+      </div>
+      
+      <div class="item-group">
+        <label for="partido">Partido Cartelera</label>
+        <input type="text" id="partido" name="partido" required placeholder="Ejemplo: 12/05/2025 - Rival X vs Rival Y">
+      </div>
+      
+     
+      <div class="item-group">
         <label for="nombre">Nombre de la Jugadora</label>
         <input type="text" id="nombre" name="nombre" required placeholder="Ejemplo: Laura Gómez">
+      </div>
+
+       <div class="item-group">
+        <label for="equipo">Equipo de la Jugadora</label>
+        <input type="text" id="equipo" name="equipo" required placeholder="Ejemplo: Club Deportivo">
       </div>
 
       <div class="item-group">
@@ -677,14 +693,20 @@
     // Función para recopilar datos y generar el informe y demás detalles
     function generateReportData() {
       var playerName = document.getElementById("nombre").value;
+      var scout = document.getElementById("scout").value;
+      var partido = document.getElementById("partido").value;
+      var equipo = document.getElementById("equipo").value;
       var position = document.getElementById("posicion").value;
       var ratings = document.querySelectorAll('.rating input[type="radio"]:checked');
       var scores = {};
       var strengths = [];
       var weaknesses = [];
-      var reportText = `📌 INFORME DE JUGADORA - ${position.toUpperCase()}\n👤 Nombre: ${playerName}\n\n`;
-      var totalScore = 0;
-      var count = 0;
+      var totalScore = 0, count = 0;
+      var reportText = `📌 INFORME DE JUGADORA - ${position.toUpperCase()}\n` +
+                       `👤 Nombre: ${playerName}\n` +
+                       `👥 Scout: ${scout}\n` +
+                       `🏟 Partido: ${partido}\n` +
+                       `⚽ Equipo: ${equipo}\n\n`;
       
       ratings.forEach(function(radio) {
         var facet = radio.getAttribute("data-faceta");
@@ -729,6 +751,9 @@
       
       return {
         playerName: playerName,
+        scout: scout,
+        partido: partido,
+        equipo: equipo,
         position: position,
         scores: scores,
         strengths: strengths,
@@ -747,7 +772,7 @@
       var data = generateReportData();
       data.email = email; // Agregar correo al objeto
       
-      fetch("https://script.google.com/macros/s/AKfycbwFbukNdf-jcg-YVAklaUX9267bW3HneWXYjs2GurxyXtbnvW61d3H27g_Vo2D8yO6f/exec", { // Reemplaza con tu URL de Apps Script
+      fetch("https://script.google.com/macros/s/AKfycbzg7jYCyRkS0A_4_r9w2NQ8yKwQgRr45vqPWf5Koq5cAE_gFH7FkhFMc3TjjIur8p4I/exec", { // Reemplaza con tu URL de Apps Script
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
