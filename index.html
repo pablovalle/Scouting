@@ -716,7 +716,7 @@
         count++;
         var phrase = "";
         if(score === 5){
-          phrase = `🔹 ${facet}: Destaca`;
+          phrase = `✅ ${facet}: Destaca`;
           strengths.push(facet);
         } else if(score === 4){
           phrase = `✔️ ${facet}: Sólido`;
@@ -730,25 +730,47 @@
           phrase = `❌ ${facet}: Crítico`;
           weaknesses.push(facet);
         }
-        reportText += phrase + "\n";
       });
+
+      report += "\n🔍 Análisis Global:\n";
+ 
+         if (strengths.length > 0) {
+             report += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
+         } else {
+             report += "❌ No presenta puntos destacados en esta evaluación.\n\n";
+         }
+ 
+         if (weaknesses.length > 0) {
+             report += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
+         } else {
+             report += "✅ No se han detectado carencias significativas.\n\n";
+         }
       
       var average = (count > 0 ? (totalScore / count).toFixed(2) : 0)*2;
       // Evaluación general según puntos fuertes y débiles
       // 📌 Evaluación general
       var evaluation = "";
       if (average > 9) {
-          evaluation = "📌 Evaluación: FICHAR YA ✅";
+          evaluation = "Evaluación: FICHAR YA ✅";
       } else if (average > 7.5) {
-          evaluation = "👀 Evaluación: INTERESANTE 🔍";
+          evaluation = "Evaluación: INTERESANTE 🔍";
       } else if (average > 6) {
-          evaluation = "🔄 Evaluación: SEGUIR OBSERVANDO 👁️";
+          evaluation = "Evaluación: SEGUIR OBSERVANDO 👁️";
       } else {
-          evaluation = "❌ Evaluación: DESCARTAR 🚫";
+          evaluation = "Evaluación: DESCARTAR 🚫";
       }
       
       reportText += "\nPromedio: " + average + "\nEvaluación: " + evaluation;
-      
+      var evaluation2 = "";
+      if (average > 9) {
+          evaluation2 = "FICHAR YA ✅";
+      } else if (average > 7.5) {
+          evaluation2 = "INTERESANTE 🔍";
+      } else if (average > 6) {
+          evaluation2 = "SEGUIR OBSERVANDO 👁️";
+      } else {
+          evaluation2 = "DESCARTAR 🚫";
+      }
       return {
         playerName: playerName,
         scout: scout,
@@ -759,7 +781,7 @@
         strengths: strengths,
         weaknesses: weaknesses,
         average: average,
-        evaluation: evaluation,
+        evaluation: evaluation2,
         report: reportText
       };
     }
@@ -772,7 +794,7 @@
       var data = generateReportData();
       data.email = email; // Agregar correo al objeto
       
-      fetch("https://script.google.com/macros/s/AKfycbzg7jYCyRkS0A_4_r9w2NQ8yKwQgRr45vqPWf5Koq5cAE_gFH7FkhFMc3TjjIur8p4I/exec", { // Reemplaza con tu URL de Apps Script
+      fetch("https://script.google.com/macros/s/AKfycbzmDWELW-cnAyhk9qLEvRdHJXkJr2fYMsUaPor5c7F8vPqVQWba7Cg0pEdIuDKPXhjl/exec", { // Reemplaza con tu URL de Apps Script
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
