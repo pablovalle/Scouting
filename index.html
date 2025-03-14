@@ -701,6 +701,8 @@
       var scores = {};
       var strengths = [];
       var weaknesses = [];
+      var strengths_phrase = [];
+      var weaknesses_phrase = [];
       var totalScore = 0, count = 0;
       var reportText = `📌 INFORME DE JUGADORA - ${position.toUpperCase()}\n` +
                        `👤 Nombre: ${playerName}\n` +
@@ -718,30 +720,34 @@
         if(score === 5){
           phrase = `✅ ${facet}: Destaca`;
           strengths.push(facet);
+          strengths_phrase.push(phrase);
         } else if(score === 4){
           phrase = `✔️ ${facet}: Sólido`;
           strengths.push(facet);
+          strengths_phrase.push(phrase);
         } else if(score === 3){
           phrase = `⚖️ ${facet}: Correcto`;
         } else if(score === 2){
           phrase = `⚠️ ${facet}: Dificultades`;
           weaknesses.push(facet);
+          weaknesses_phrase.push(phrase);
         } else {
           phrase = `❌ ${facet}: Crítico`;
           weaknesses.push(facet);
+          weaknesses_phrase.push(phrase);
         }
       });
 
       reportText += "\n🔍 Análisis Global:\n";
  
          if (strengths.length > 0) {
-             reportText += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
+             reportText += "💪 Puntos Fuertes:\n" + strengths_phrase.join("\n") + "\n\n";
          } else {
              reportText += "❌ No presenta puntos destacados en esta evaluación.\n\n";
          }
  
          if (weaknesses.length > 0) {
-             reportText += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
+             reportText += "⚠️ Aspectos a Mejorar:\n" + weaknesses_phrase.join("\n") + "\n\n";
          } else {
              reportText += "✅ No se han detectado carencias significativas.\n\n";
          }
