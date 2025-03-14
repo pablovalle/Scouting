@@ -732,18 +732,18 @@
         }
       });
 
-      report += "\n🔍 Análisis Global:\n";
+      reportText += "\n🔍 Análisis Global:\n";
  
          if (strengths.length > 0) {
-             report += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
+             reportText += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
          } else {
-             report += "❌ No presenta puntos destacados en esta evaluación.\n\n";
+             reportText += "❌ No presenta puntos destacados en esta evaluación.\n\n";
          }
  
          if (weaknesses.length > 0) {
-             report += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
+             reportText += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
          } else {
-             report += "✅ No se han detectado carencias significativas.\n\n";
+             reportText += "✅ No se han detectado carencias significativas.\n\n";
          }
       
       var average = (count > 0 ? (totalScore / count).toFixed(2) : 0)*2;
