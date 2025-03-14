@@ -665,8 +665,14 @@
   <script>
     // Mostrar la sección de evaluación cuando se selecciona la posición
     document.getElementById('posicion').addEventListener('change', function() {
-      document.getElementById('section-items').classList.remove('hidden');
-    });
+       var sections = document.querySelectorAll('.position-section');
+       sections.forEach(function(section) {
+         section.classList.add('hidden');
+       });
+       var selected = this.value;
+       if(selected) {
+         document.getElementById('section-' + selected).classList.remove('hidden');
+       }});
 
     // Función para recopilar datos y generar el informe y demás detalles
     function generateReportData() {
