@@ -661,124 +661,103 @@
       <button type="submit" class="submit-btn" id="SubmitButton">Enviar Informe</button>
     </form>
   </div>
-
+  
   <script>
-    // Muestra la sección de ítems según la posición seleccionada
+    // Mostrar la sección de evaluación cuando se selecciona la posición
     document.getElementById('posicion').addEventListener('change', function() {
-      var sections = document.querySelectorAll('.position-section');
-      sections.forEach(function(section) {
-        section.classList.add('hidden');
-      });
-      var selected = this.value;
-      if(selected) {
-        document.getElementById('section-' + selected).classList.remove('hidden');
-      }
+      document.getElementById('section-items').classList.remove('hidden');
     });
-    function generateReport() {
-        var playerName = document.getElementById("nombre").value;
-        var position = document.getElementById("posicion").value;
-        var ratings = document.querySelectorAll('.rating input[type="radio"]:checked');
 
-        let strengths = [];
-        let weaknesses = [];
-
-        let report = `📌 INFORME DE JUGADORA - ${playerName}\n`;
-        report += `👤 Posición: ${position}\n\n`;
-        let scores=0;
-        ratings.forEach(function(radio) {
-            let itemLabel = radio.getAttribute("data-faceta");
-            let score = parseInt(radio.value);
-            let phrase = "";
-            scores=scores+score;
-
-            if (score === 5) {
-                phrase = `✅ ${itemLabel}: La jugadora sobresale en esta faceta, mostrando un nivel destacado.`;
-                strengths.push(phrase);
-            } else if (score === 4) {
-                phrase = `✔️ ${itemLabel}: Tiene un rendimiento sólido y consistente.`;
-                strengths.push(phrase);
-            } else if (score === 3) {
-                phrase = `⚖️ ${itemLabel}: Cumple correctamente, pero tiene margen de mejora.`;
-            } else if (score === 2) {
-                phrase = `⚠️ ${itemLabel}: Presenta dificultades en este aspecto, lo que podría limitar su rendimiento.`;
-                weaknesses.push(phrase);
-            } else {
-                phrase = `❌ ${itemLabel}: Necesita una mejora urgente en esta área para competir al nivel deseado.`;
-                weaknesses.push(phrase);
-            }
-
-            //report += phrase + "\n";
-            //console.log(phrase);
-        });
-
-        globalScore=scores/ratings.length;
-        report += "\n🔍 Análisis Global:\n";
-
-        if (strengths.length > 0) {
-            report += "💪 Puntos Fuertes:\n" + strengths.join("\n") + "\n\n";
+    // Función para recopilar datos y generar el informe y demás detalles
+    function generateReportData() {
+      var playerName = document.getElementById("nombre").value;
+      var position = document.getElementById("posicion").value;
+      var ratings = document.querySelectorAll('.rating input[type="radio"]:checked');
+      var scores = {};
+      var strengths = [];
+      var weaknesses = [];
+      var reportText = `📌 INFORME DE JUGADORA - ${position.toUpperCase()}\n👤 Nombre: ${playerName}\n\n`;
+      var totalScore = 0;
+      var count = 0;
+      
+      ratings.forEach(function(radio) {
+        var facet = radio.getAttribute("data-faceta");
+        var score = parseInt(radio.value);
+        scores[facet] = score;
+        totalScore += score;
+        count++;
+        var phrase = "";
+        if(score === 5){
+          phrase = `🔹 ${facet}: Destaca`;
+          strengths.push(facet);
+        } else if(score === 4){
+          phrase = `✔️ ${facet}: Sólido`;
+          strengths.push(facet);
+        } else if(score === 3){
+          phrase = `⚖️ ${facet}: Correcto`;
+        } else if(score === 2){
+          phrase = `⚠️ ${facet}: Dificultades`;
+          weaknesses.push(facet);
         } else {
-            report += "❌ No presenta puntos destacados en esta evaluación.\n\n";
+          phrase = `❌ ${facet}: Crítico`;
+          weaknesses.push(facet);
         }
-
-        if (weaknesses.length > 0) {
-            report += "⚠️ Aspectos a Mejorar:\n" + weaknesses.join("\n") + "\n\n";
-        } else {
-            report += "✅ No se han detectado carencias significativas.\n\n";
-        }
-        report += `\nPuntuación Media: ${(globalScore*2).toFixed(2)} \n`;
-        // 📌 Evaluación general
-        let evaluation = "";
-        if (globalScore > 4.5) {
-            evaluation = "📌 Evaluación: FICHAR YA ✅";
-        } else if (globalScore > 3.75) {
-            evaluation = "👀 Evaluación: INTERESANTE 🔍";
-        } else if (globalScore > 3) {
-            evaluation = "🔄 Evaluación: SEGUIR OBSERVANDO 👁️";
-        } else {
-            evaluation = "❌ Evaluación: DESCARTAR 🚫";
-        }
-
-        report += evaluation + "\n";
-
-        return report;
+        reportText += phrase + "\n";
+      });
+      
+      var average = (count > 0 ? (totalScore / count).toFixed(2) : 0)*2;
+      // Evaluación general según puntos fuertes y débiles
+      // 📌 Evaluación general
+      var evaluation = "";
+      if (average > 9) {
+          evaluation = "📌 Evaluación: FICHAR YA ✅";
+      } else if (average > 7.5) {
+          evaluation = "👀 Evaluación: INTERESANTE 🔍";
+      } else if (average > 6) {
+          evaluation = "🔄 Evaluación: SEGUIR OBSERVANDO 👁️";
+      } else {
+          evaluation = "❌ Evaluación: DESCARTAR 🚫";
+      }
+      
+      reportText += "\nPromedio: " + average + "\nEvaluación: " + evaluation;
+      
+      return {
+        playerName: playerName,
+        position: position,
+        scores: scores,
+        strengths: strengths,
+        weaknesses: weaknesses,
+        average: average,
+        evaluation: evaluation,
+        report: reportText
+      };
     }
 
-
-    // Manejo básico de envío del formulario
+    // Manejo del envío del formulario
     document.getElementById('scoutingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var email = document.getElementById('email').value;
-        var playerName = document.getElementById('nombre').value;
-        var report = generateReport();
-        const submitButton = document.getElementById("SubmitButton");
-        const form = document.getElementById("scoutingForm");
-        submitButton.disabled = true;
-        console.log(JSON.stringify({
-            email: email,
-            playerName: playerName,
-            report: report
-            }))
-        fetch("https://script.google.com/macros/s/AKfycbyM4Y2J8yuE1zy4tmV7hybO-hyWJuHCKhYB1__RhD47nEmt9Bo3IDKiSme0MZ_nl7Un/exec", { // Reemplaza con tu URL de Apps Script
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-            email: email,
-            playerName: playerName,
-            report: report
-            }),
-        })
-        .then(() => {
-            alert("Informe de " + playerName + " enviado a " + email);
-            submitButton.disabled = false;
-            form.reset();
-        })
-        .catch(error => {console.error("Error al enviar:", error);
-          submitButton.disabled = false;
-          form.reset();
-        });
+      e.preventDefault();
+      
+      // Verificar que todos los ítems tengan respuesta
+      let ratings = document.querySelectorAll('.rating');
+      for (let rating of ratings) {
+        if (!rating.querySelector('input:checked')) {
+          alert("Por favor, completa todas las evaluaciones antes de enviar.");
+          return;
+        }
+      }
+      
+      var email = document.getElementById('email').value;
+      var data = generateReportData();
+      data.email = email; // Agregar correo al objeto
+      
+      fetch("https://script.google.com/macros/s/AKfycbwFbukNdf-jcg-YVAklaUX9267bW3HneWXYjs2GurxyXtbnvW61d3H27g_Vo2D8yO6f/exec", { // Reemplaza con tu URL de Apps Script
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then(() => {
+        alert("Informe de " + data.playerName + " enviado a " + email);
+      }).catch(error => console.error("Error al enviar:", error));
     });
   </script>
 </body>
